@@ -1,0 +1,92 @@
+﻿<Window x:Class="XML_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:XML_app.ViewModels"
+        Title="XML Populator" Height="600" Width="1024">
+	  <Window.Resources>
+			<ResourceDictionary>
+				  <ResourceDictionary.MergedDictionaries>
+						<ResourceDictionary Source="ModernDesign.xaml"/>
+				  </ResourceDictionary.MergedDictionaries>
+			</ResourceDictionary>
+	  </Window.Resources>
+	  <Window.DataContext>
+			<local:MainWindowViewModel/>
+	  </Window.DataContext>
+	  <Grid Background="#F0F0F0">
+			<Grid.ColumnDefinitions>
+				  <ColumnDefinition x:Name="Column_Left"/>
+				  <ColumnDefinition x:Name="Column_Menu" Width="181"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- Left Column: A Grid with two rows: sort button on top and ListView below -->
+			<Grid Grid.Column="0" Margin="10">
+				  <Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+				  </Grid.RowDefinitions>
+				  <!-- Sort Button -->
+				  <Button x:Name="BT_SortOrder" Style="{StaticResource FluffySortButtonStyle}"
+              Command="{Binding SortCommand}"
+              Content="{Binding SortButtonContent}"
+              HorizontalAlignment="Right" Margin="0,0,0,5" Grid.Row="0" Width="159"/>
+				  <!-- ListView -->
+				  <ListView x:Name="DataItemsControl" Grid.Row="1" HorizontalContentAlignment="Stretch"
+                ItemsSource="{Binding Items}">
+						<ListView.ItemContainerStyle>
+							  <Style TargetType="ListViewItem">
+									<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+							  </Style>
+						</ListView.ItemContainerStyle>
+						<ListView.ItemTemplate>
+							  <DataTemplate>
+									<!-- Card style: each item is displayed as a card -->
+									<Border Style="{StaticResource DataCardStyle}">
+										  <StackPanel>
+												<!-- FullName in blue -->
+												<TextBlock Text="{Binding FullName}" Style="{StaticResource FullNameTextStyle}"/>
+												<Separator Margin="0,5"/>
+												<!-- Bottom row: Price details -->
+												<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+													  <StackPanel Margin="10,0">
+															<TextBlock Text="Price Without Tax:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
+															<TextBlock Text="{Binding PriceWithoutTax, StringFormat={}{0:N2} Kč, ConverterCulture=cs-CZ}" FontSize="14" TextAlignment="Center"/>
+													  </StackPanel>
+													  <StackPanel Margin="10,0">
+															<TextBlock Text="Price With Tax:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
+															<TextBlock Text="{Binding PriceWithTax, StringFormat={}{0:N2} Kč, ConverterCulture=cs-CZ}" FontSize="14" TextAlignment="Center"/>
+													  </StackPanel>
+												</StackPanel>
+										  </StackPanel>
+									</Border>
+							  </DataTemplate>
+						</ListView.ItemTemplate>
+				  </ListView>
+			</Grid>
+
+			<!-- Right Column: Menu as a Grid with three rows -->
+			<Grid Grid.Column="1" VerticalAlignment="Top" Margin="0,44,10,0" Height="496">
+				  <Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+				  </Grid.RowDefinitions>
+				  <!-- Top row: Generate and Load XML buttons -->
+				  <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Width="171" Margin="0,0,0,373" Grid.RowSpan="2" VerticalAlignment="Center">
+						<Button x:Name="BT_GenerateXML" Content="Generate XML"
+							Style="{StaticResource BlueButtonStyle}"
+							Command="{Binding GenerateXmlCommand}" Margin="36,0,31,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="104" Height="20"/>
+						<Button x:Name="BT_LoadXML" Content="Load XML"
+							Style="{StaticResource BlueButtonStyle}"
+							Command="{Binding LoadXmlCommand}" Margin="36,0,31,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="104" Height="20"/>
+				  </StackPanel>
+				  <!-- Middle row: Spacer -->
+				  <!-- Bottom row: Toggle button -->
+				  <ToggleButton x:Name="TB_GroupByFullName" 
+                    Style="{StaticResource AiryToggleButtonStyle}"
+                    Content="Prodeje modelu"
+                    Command="{Binding ToggleGroupCommand}"
+                    Grid.Row="2" HorizontalAlignment="Center" Width="151" Height="42" Margin="10" VerticalAlignment="Center"/>
+			</Grid>
+	  </Grid>
+</Window>
