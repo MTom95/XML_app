@@ -29,7 +29,7 @@
 				  <Button x:Name="BT_SortOrder" Style="{StaticResource FluffySortButtonStyle}"
               Command="{Binding SortCommand}"
               Content="{Binding SortButtonContent}"
-              HorizontalAlignment="Right" Margin="0,0,0,5" Grid.Row="0" Width="159"/>
+              HorizontalAlignment="Right" Margin="0,0,0,5" Grid.Row="0" Width="232"/>
 				  <!-- ListView -->
 				  <ListView x:Name="DataItemsControl" Grid.Row="1" HorizontalContentAlignment="Stretch"
                 ItemsSource="{Binding Items}">
@@ -49,11 +49,11 @@
 												<!-- Bottom row: Price details -->
 												<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 													  <StackPanel Margin="10,0">
-															<TextBlock Text="Price Without Tax:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
+															<TextBlock Text="Cena bez DPH:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
 															<TextBlock Text="{Binding PriceWithoutTax, StringFormat={}{0:N2} Kč, ConverterCulture=cs-CZ}" FontSize="14" TextAlignment="Center"/>
 													  </StackPanel>
 													  <StackPanel Margin="10,0">
-															<TextBlock Text="Price With Tax:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
+															<TextBlock Text="Cena s DPH:" FontWeight="SemiBold" FontSize="12" Foreground="Gray" TextAlignment="Center"/>
 															<TextBlock Text="{Binding PriceWithTax, StringFormat={}{0:N2} Kč, ConverterCulture=cs-CZ}" FontSize="14" TextAlignment="Center"/>
 													  </StackPanel>
 												</StackPanel>
@@ -73,20 +73,33 @@
 				  </Grid.RowDefinitions>
 				  <!-- Top row: Generate and Load XML buttons -->
 				  <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Width="171" Margin="0,0,0,373" Grid.RowSpan="2" VerticalAlignment="Center">
-						<Button x:Name="BT_GenerateXML" Content="Generate XML"
+						<Button x:Name="BT_GenerateXML" Content="Vygeneruj XML"
 							Style="{StaticResource BlueButtonStyle}"
 							Command="{Binding GenerateXmlCommand}" Margin="36,0,31,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="104" Height="20"/>
-						<Button x:Name="BT_LoadXML" Content="Load XML"
+						<Button x:Name="BT_LoadXML" Content="Načti XML"
 							Style="{StaticResource BlueButtonStyle}"
 							Command="{Binding LoadXmlCommand}" Margin="36,0,31,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="104" Height="20"/>
 				  </StackPanel>
 				  <!-- Middle row: Spacer -->
 				  <!-- Bottom row: Toggle button -->
 				  <ToggleButton x:Name="TB_GroupByFullName" 
-                    Style="{StaticResource AiryToggleButtonStyle}"
-                    Content="Prodeje modelu"
-                    Command="{Binding ToggleGroupCommand}"
-                    Grid.Row="2" HorizontalAlignment="Center" Width="151" Height="42" Margin="10" VerticalAlignment="Center"/>
+					Style="{StaticResource AiryToggleButtonStyle}"
+					Command="{Binding ToggleGroupCommand}"
+					Content="{Binding ToggleButtonContent}"
+					Grid.Row="2" 
+					HorizontalAlignment="Right" 
+					Width="127" 
+					Height="42" 
+					Margin="0,0,22,10">
+						<ToggleButton.ContentTemplate>
+							  <DataTemplate>
+									<!-- Binding directly to the Content (which is our string) -->
+									<TextBlock Text="{Binding}" 
+							 TextAlignment="Center" 
+							 TextWrapping="Wrap"/>
+							  </DataTemplate>
+						</ToggleButton.ContentTemplate>
+				  </ToggleButton>
 			</Grid>
 	  </Grid>
 </Window>

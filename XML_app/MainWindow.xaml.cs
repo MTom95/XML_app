@@ -8,7 +8,7 @@ namespace XML_app
             public MainWindow()
             {
                   InitializeComponent();
-                  // Set the DataContext to an instance of your ViewModel.
+                  // Set the DataContext to an instance of the ViewModel.
                   DataContext = new MainWindowViewModel();
             }
       }

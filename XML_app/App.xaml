@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:XML_app"
              StartupUri="pack://application:,,,/XML_app;component/mainwindow.xaml">
-    <Application.Resources>
+	  <!--For some reason the StartupUri has to be in this format and not just "/mainwindow.xaml". Otherwise ModernDesign.xaml doesnt load.-->
+	  <Application.Resources>
          
     </Application.Resources>
 </Application>

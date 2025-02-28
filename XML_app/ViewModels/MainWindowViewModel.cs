@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using XML_app.Models;
@@ -31,9 +32,23 @@ namespace XML_app.ViewModels
             public bool IsGrouped
             {
                   get { return _isGrouped; }
-                  set { _isGrouped = value; OnPropertyChanged(nameof(IsGrouped)); ApplyGroupingAndSorting(); }
+                  set
+                  {
+                        if (_isGrouped != value)
+                        {
+                              _isGrouped = value;
+                              OnPropertyChanged(nameof(IsGrouped));
+                              OnPropertyChanged(nameof(ToggleButtonContent)); // notify that ToggleButtonContent has changed
+                              ApplyGroupingAndSorting();
+                        }
+                  }
             }
 
+            // New property for the ToggleButton text.
+            public string ToggleButtonContent
+            {
+                  get { return IsGrouped ? "Zobraz všechny\nprodeje" : "Zobraz prodeje\ndle modelu"; }
+            }
             private SortMode _globalSortMode = SortMode.Original;
             public SortMode GlobalSortMode
             {
@@ -42,21 +57,31 @@ namespace XML_app.ViewModels
             }
 
             // Property used by the sort button's Content.
+            // Could maybe sort by price on the grouped view as well...
             public string SortButtonContent
             {
                   get
                   {
-                        string sortBy = IsGrouped ? "FullName" : "Price";
+                        string sortBy = IsGrouped ? "Model" : "Cena";
+                        string czPreklad = "";
                         string arrow = "";
-                        if (GlobalSortMode == SortMode.Ascending)
-                        {
-                              arrow = " ↑";
+                        switch (GlobalSortMode)
+                        {     //Ideally I'd use an arrow image, because a character in a string looks odd to scale.
+                              case SortMode.Ascending:
+                                    czPreklad = "Vzestupně";
+                                    arrow = " ↑";
+                                    break;
+                              case SortMode.Descending:
+                                    czPreklad = "Sestupně";
+                                    arrow = " ↓";
+                                    break;
+                              default:
+                                    // When Original, no translation or arrow is shown.
+                                    czPreklad = "";
+                                    arrow = "";
+                                    break;
                         }
-                        else if (GlobalSortMode == SortMode.Descending)
-                        {
-                              arrow = " ↓";
-                        }
-                        return $"Sort: {GlobalSortMode} ({sortBy}){arrow}";
+                        return $"Seřadit: {czPreklad} ({sortBy}){arrow}";
                   }
             }
 
@@ -94,10 +119,15 @@ namespace XML_app.ViewModels
                       new SoldCar { CarModel = "Felicia", DateOfSale = DateTime.ParseExact("02-12-2000", "dd-MM-yyyy", CultureInfo.InvariantCulture), PriceWithTax = 210000, Tax = 19 },
                       new SoldCar { CarModel = "Oktávia", DateOfSale = DateTime.ParseExact("02-12-2010", "dd-MM-yyyy", CultureInfo.InvariantCulture), PriceWithTax = 500000, Tax = 20 },
                   };
+                  // Set CarBrand for each car.
+                  foreach (var car in cars)
+                  {
+                        car.CarBrand = "Škoda";
+                  }
 
                   LoadedXML = new ObservableCollection<SoldCar>(cars);
 
-                  // Save XML file.
+                  // Build the XML structure using LINQ to XML.
                   XElement xmlRoot = new XElement("soldCar",
                       from car in cars
                       select new XElement("Car",
@@ -111,12 +141,13 @@ namespace XML_app.ViewModels
                       ));
                   string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "prodane_vozy_prosinec.xml");
                   xmlRoot.Save(filePath);
-
+                  MessageBox.Show($"Your XML file has been created at {filePath}.");
                   ApplyGroupingAndSorting();
             }
 
             private void LoadXml()
             {
+                  //Choose a XML or any file.
                   OpenFileDialog dlg = new OpenFileDialog
                   {
                         Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*",
