@@ -15,10 +15,10 @@ namespace XML_app.Models
             public double PriceWithTax { get; set; }
             public double Tax { get; set; }
 
-            // Computed property: calculates the price without tax.
+            // Computed property: calculates the price without tax. Assuming the price in the table was the sale price.
             public double PriceWithoutTax => PriceWithTax / (1 + (Tax / 100));
 
-            // Computed property: concatenates CarBrand and CarModel.
+            // Concatenates CarBrand and CarModel.
             public string FullName => $"{CarBrand} {CarModel}";
 
             public event PropertyChangedEventHandler PropertyChanged;

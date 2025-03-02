@@ -57,7 +57,7 @@ namespace XML_app.ViewModels
             }
 
             // Property used by the sort button's Content.
-            // Could maybe sort by price on the grouped view as well...
+            // TO-DO Sort by prices even in grouped view.
             public string SortButtonContent
             {
                   get
@@ -93,7 +93,7 @@ namespace XML_app.ViewModels
 
             public MainWindowViewModel()
             {
-                  GenerateXmlCommand = new RelayCommand(_ => GenerateXml());
+                  GenerateXmlCommand = new RelayCommand(_ => GenerateXml()); //Hidden button
                   LoadXmlCommand = new RelayCommand(_ => LoadXml());
                   SortCommand = new RelayCommand(_ => CycleSortMode());
                   ToggleGroupCommand = new RelayCommand(_ => ToggleGroup());
@@ -102,7 +102,7 @@ namespace XML_app.ViewModels
 
             private void GenerateXml()
             {
-                  // Create sample data.
+                  // Create sample XML data. Button is hidden, data should be according to the table in email.
                   var cars = new[]
                   {
                       new SoldCar { CarModel = "Oktávia", DateOfSale = DateTime.ParseExact("02-12-2010", "dd-MM-yyyy", CultureInfo.InvariantCulture), PriceWithTax = 500000, Tax = 20 },

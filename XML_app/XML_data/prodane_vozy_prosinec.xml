@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<soldCar>
+  <Car CarBrand="Škoda" CarModel="Oktávia" FullName="Škoda Oktávia" DateOfSale="02-12-2010" PriceWithTax="500000" PriceWithoutTax="416666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Felicia" FullName="Škoda Felicia" DateOfSale="03-12-2010" PriceWithTax="210000" PriceWithoutTax="175000" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Fábia" FullName="Škoda Fábia" DateOfSale="04-12-2010" PriceWithTax="350000" PriceWithoutTax="291666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Oktávia" FullName="Škoda Oktávia" DateOfSale="04-12-2010" PriceWithTax="500000" PriceWithoutTax="416666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Oktávia" FullName="Škoda Oktávia" DateOfSale="05-12-2010" PriceWithTax="500000" PriceWithoutTax="416666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Fábia" FullName="Škoda Fábia" DateOfSale="05-12-2010" PriceWithTax="350000" PriceWithoutTax="291666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Fábia" FullName="Škoda Fábia" DateOfSale="06-12-2010" PriceWithTax="350000" PriceWithoutTax="291666.66666666669" Tax="20" />
+  <Car CarBrand="Škoda" CarModel="Forman" FullName="Škoda Forman" DateOfSale="04-12-2000" PriceWithTax="100000" PriceWithoutTax="84033.613445378156" Tax="19" />
+  <Car CarBrand="Škoda" CarModel="Favorit" FullName="Škoda Favorit" DateOfSale="02-12-2000" PriceWithTax="80000" PriceWithoutTax="67226.890756302528" Tax="19" />
+  <Car CarBrand="Škoda" CarModel="Forman" FullName="Škoda Forman" DateOfSale="02-12-2000" PriceWithTax="100000" PriceWithoutTax="84033.613445378156" Tax="19" />
+  <Car CarBrand="Škoda" CarModel="Felicia" FullName="Škoda Felicia" DateOfSale="02-12-2000" PriceWithTax="210000" PriceWithoutTax="176470.58823529413" Tax="19" />
+  <Car CarBrand="Škoda" CarModel="Felicia" FullName="Škoda Felicia" DateOfSale="02-12-2000" PriceWithTax="210000" PriceWithoutTax="176470.58823529413" Tax="19" />
+  <Car CarBrand="Škoda" CarModel="Oktávia" FullName="Škoda Oktávia" DateOfSale="02-12-2010" PriceWithTax="500000" PriceWithoutTax="416666.66666666669" Tax="20" />
+</soldCar>
